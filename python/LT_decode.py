@@ -97,12 +97,15 @@ class DecodeSession:
                 for i in range(0, rowcols):
                     for j in range(0, rowcols):
                         chunk_index = i * rowcols + j
+
                         if chunk_index < chunk_amount:
                             f = "#AAAAAA"
                             if self.currentFile.has_chunk(chunk_index):
                                 f = "#00FF00"
+                            output_string = str(int(math.pow(2,chunk_index)))
                             self.chunk_canvas.create_rectangle(j * chunk_width, i * chunk_height, (j + 1) * chunk_width, (i + 1) * chunk_height, outline="#000000", fill=f)
-                            self.chunk_canvas.create_text((j +0.5) * chunk_width, (i + 0.5) * chunk_height, text="2^"+str(int(chunk_index)))
+                            if self.currentFile.chunk_amount < 20:
+                                self.chunk_canvas.create_text((j +0.5) * chunk_width, (i + 0.5) * chunk_height, text=output_string)
 
 
     def draw_histogram(self):
